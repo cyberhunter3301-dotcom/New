@@ -1,1 +1,340 @@
-# New
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Message Meant Only for Megha</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Syncopate:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --pink:#ff007a;
+  --cyan:#00f2ff;
+  --purple:#7000ff;
+  --bg:#03030a;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  cursor:none;
+}
+
+body{
+  font-family:'Quicksand',sans-serif;
+  color:white;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,0,122,.15), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(0,242,255,.15), transparent 40%),
+    linear-gradient(120deg,#02020a,#040410,#02020a);
+  overflow-x:hidden;
+}
+
+/* TIME BANNER */
+.future-banner{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:12px;
+  text-align:center;
+  font-family:'Syncopate',sans-serif;
+  font-size:.75rem;
+  letter-spacing:3px;
+  background:linear-gradient(90deg,var(--purple),var(--pink));
+  z-index:1000;
+}
+
+/* CUSTOM CURSOR */
+#cursor{
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:white;
+  position:fixed;
+  pointer-events:none;
+  mix-blend-mode:difference;
+  z-index:9999;
+}
+
+/* PARTICLES */
+#particleCanvas{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  padding-top:140px;
+  padding-bottom:120px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.hero small{
+  font-family:'Syncopate',sans-serif;
+  color:var(--cyan);
+  letter-spacing:3px;
+  text-shadow:0 0 15px var(--cyan);
+}
+
+.hero h1{
+  font-family:'Pacifico',cursive;
+  font-size:clamp(3rem,10vw,7rem);
+  margin:20px 0;
+  background:linear-gradient(90deg,var(--pink),var(--cyan),var(--purple));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:hue 6s linear infinite;
+}
+
+.hero p{
+  max-width:500px;
+  opacity:.8;
+}
+
+/* MEMORY PHOTOS */
+.photo-section{
+  padding:120px 20px 140px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:60px;
+}
+
+.polaroid{
+  width:280px;
+  background:white;
+  padding:15px 15px 45px;
+  box-shadow:0 25px 50px rgba(0,0,0,.6);
+  transform:rotate(var(--r));
+  transition:.4s ease;
+}
+
+.polaroid img{
+  width:100%;
+  height:250px;
+  object-fit:cover;
+}
+
+.polaroid:hover{
+  transform:rotate(0) scale(1.15);
+  z-index:10;
+}
+
+.polaroid p{
+  margin-top:15px;
+  font-family:'Pacifico',cursive;
+  color:#333;
+  text-align:center;
+  font-size:1.2rem;
+}
+
+/* LETTER */
+.letter{
+  max-width:700px;
+  margin:0 auto;
+  padding:140px 20px;
+  text-align:center;
+}
+
+.letter h2{
+  font-family:'Syncopate',sans-serif;
+  color:var(--cyan);
+  margin-bottom:30px;
+}
+
+#letterText{
+  font-size:1.1rem;
+  line-height:1.8;
+  opacity:.9;
+  min-height:200px;
+}
+
+/* BUTTON */
+.btn-container{
+  padding-bottom:160px;
+  text-align:center;
+}
+
+button{
+  padding:22px 60px;
+  font-size:1.3rem;
+  border-radius:60px;
+  border:2px solid var(--cyan);
+  background:transparent;
+  color:var(--cyan);
+  font-family:'Syncopate',sans-serif;
+  box-shadow:0 0 30px rgba(0,242,255,.3);
+  transition:.3s;
+}
+
+button:hover{
+  background:var(--cyan);
+  color:black;
+  box-shadow:0 0 70px var(--cyan);
+}
+
+/* SECRET MESSAGE */
+#secret{
+  display:none;
+  text-align:center;
+  padding-bottom:120px;
+  color:var(--pink);
+  font-family:'Pacifico',cursive;
+  font-size:1.4rem;
+}
+
+@keyframes hue{
+  to{filter:hue-rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="future-banner" id="timeBanner"></div>
+<div id="cursor"></div>
+<canvas id="particleCanvas"></canvas>
+
+<section class="hero">
+  <small> IT'S OVI FROM THE FUTURE</small>
+  <h1 id="name">Megha Nayak</h1>
+  <h3><p>This moment was saved. The future didn’t forget you.</p></h3>
+</section>
+
+<section class="photo-section">
+  <div class="polaroid" style="--r:-6deg"><img src="bir1.jpeg"><p>The Helper ✨</p></div>
+  <div class="polaroid" style="--r:4deg"><img src="bir2.jpeg"><p>The Caring Soul 💖</p></div>
+  <div class="polaroid" style="--r:-3deg"><img src="bir3.jpeg"><p>Pure Joy 🌟</p></div>
+</section>
+
+<section class="letter">
+  <h2>A LETTER FROM THE FUTURE</h2>
+  <div id="letterText"></div>
+</section>
+
+<div class="btn-container">
+  <button onclick="celebrate()">SAVE THIS MOMENT</button>
+</div>
+
+<div id="secret">You stayed. That means you feel deeply. The future needs people like you 💫</div>
+
+<script>
+// CURSOR
+const cursor=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{
+  cursor.style.left=e.clientX+'px';
+  cursor.style.top=e.clientY+'px';
+});
+
+// TIME BANNER
+function updateTime(){
+  const now=new Date();
+  document.getElementById('timeBanner').innerText=
+    `LOCAL TIME • DHAKA • ${now.toLocaleTimeString()}`;
+}
+setInterval(updateTime,1000);
+updateTime();
+
+// PARTICLES
+const canvas=document.getElementById('particleCanvas');
+const ctx=canvas.getContext('2d');
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+let particles=[];
+class Particle{
+  constructor(){
+    this.x=Math.random()*canvas.width;
+    this.y=Math.random()*canvas.height;
+    this.r=Math.random()*3+1;
+    this.c=Math.random()>.5?'#ff007a':'#00f2ff';
+    this.v=Math.random()*0.6+0.2;
+  }
+  draw(){
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+    ctx.fillStyle=this.c;
+    ctx.shadowBlur=15;
+    ctx.shadowColor=this.c;
+    ctx.fill();
+  }
+  update(){
+    this.y-=this.v;
+    if(this.y<0)this.y=canvas.height;
+  }
+}
+for(let i=0;i<140;i++)particles.push(new Particle());
+(function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{p.update();p.draw();});
+  requestAnimationFrame(animate);
+})();
+
+// LETTER TYPING
+const text=`Hello Megha ,
+
+I’m writing this from a future where you once doubted yourself —
+and still became stronger.
+
+You didn’t change the world loudly.
+You changed it quietly.
+By caring. By staying kind. By being you.
+
+This moment mattered.
+And it always will.
+
+— Ovi...`;
+
+let i=0;
+function typeLetter(){
+  if(i<text.length){
+    document.getElementById('letterText').innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(typeLetter,40);
+  }
+}
+typeLetter();
+
+// SECRET REVEAL
+let stayTimer;
+window.addEventListener('mousemove',()=>{
+  clearTimeout(stayTimer);
+  stayTimer=setTimeout(()=>{
+    document.getElementById('secret').style.display='block';
+  },15000);
+});
+
+// CELEBRATION
+function celebrate(){
+  for(let i=0;i<70;i++){
+    const c=document.createElement('div');
+    c.style.cssText=`
+      position:fixed;
+      width:10px;height:10px;
+      left:${Math.random()*100}vw;
+      top:100vh;
+      background:${['#ff007a','#00f2ff','#7000ff','#fff'][Math.floor(Math.random()*4)]};
+      z-index:3000;
+      transition:3s ease;
+    `;
+    document.body.appendChild(c);
+    setTimeout(()=>{
+      c.style.transform=`translateY(-120vh) rotate(${Math.random()*720}deg)`;
+      c.style.opacity=0;
+    },30);
+    setTimeout(()=>c.remove(),3000);
+  }
+  alert("Moment saved.\nThe future smiled ^_^ ");
+}
+</script>
+
+</body>
+</html>
